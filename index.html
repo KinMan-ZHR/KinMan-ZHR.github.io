@@ -1,179 +1,1062 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <title>KinMan 谨漫 | 关于我的简单介绍</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta -equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/css/font.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/xiaoshidi-hub/cdn@1.2/blog/Blog.png"
-          type="image/x-icon">
-</head>
-<style type="text/css">
-
-    body {
-        font-family: '猫的天空之城', serif;
-        background-color: #000000
-    }
-
-    a {
-        color: #080808;
-    }
-
-    a:hover {
-        color: #121212
-    }
-
-    @media (min-width: 768px) {
-        .introducation {
-            width: 90%;
-            position: absolute;
-            top: 49%;
-            left: 50%;
-            transform: translate(-50%, -50%)
+    <title>KinMan (谨漫) | INTJ Software Architect & Systems Engineer</title>
+    <meta name="description" content="KinMan's Personal Terminal & Architecture Hub. INTJ Systems Thinker, Backend Architect, Game Theorist.">
+    <meta name="theme-color" content="#080c14">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+    <style>
+        :root {
+            --bg-base: #060911;
+            --bg-surface: #0c121e;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(30, 41, 59, 0.85);
+            --border-glow: rgba(56, 189, 248, 0.25);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent-cyan: #38bdf8;
+            --accent-blue: #0284c7;
+            --accent-emerald: #10b981;
+            --accent-violet: #a855f7;
+            --accent-amber: #f59e0b;
+            --font-mono: "JetBrains Mono", "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-    }
 
-    .img {
-        vertical-align: center;
-    }
-</style>
-<!-- 下面这两行代码是取消右键的，如果保留右键注释即可 -->
-<body oncontextmenu="return false" onselectstart="return false"
-      ondragstart="return false" onbeforecopy="return false" oncopy=document.selection.empty()
-      onselect=document.selection.empty()>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
 
-<div class="container container-fluid banner-info">
-    <div class="introducation">
-        <div class="row introdu">
-            <div class="col-md-4">
-                <img class="rotation img" src="https://avatars.githubusercontent.com/u/105029775?v=4" alt="author.jpg"
-                     width="200px" height="200px" style="opacity: 0.6;border: 1px solid #080808;;border-radius: 50%;">
+        /* 动态背景 Canvas */
+        #cyber-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        /* 页面整体布局容器 */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* 顶部系统导航栏 */
+        header.nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 48px;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sys-identity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .sys-badge {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.3), rgba(168, 85, 247, 0.3));
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+        }
+
+        .sys-title {
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .sys-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--accent-emerald);
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 5px 12px;
+            border-radius: 9999px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* 顶部 Hero 区域 */
+        .hero-section {
+            padding: 32px 0 60px;
+        }
+
+        .hero-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        .hero-title {
+            font-size: clamp(34px, 5.5vw, 56px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 780px;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        .hero-desc strong {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #fff;
+            padding: 13px 26px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55);
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 13px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        /* 核心系统指标网格 (Telemetry Grid) */
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 56px;
+        }
+
+        .telemetry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 22px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telemetry-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-cyan)), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .telemetry-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .telemetry-card:hover::before {
+            opacity: 1;
+        }
+
+        .telemetry-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .telemetry-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            font-family: var(--font-mono);
+        }
+
+        .telemetry-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* 区块通用头部 */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .section-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* 旗舰项目展示卡片 */
+        .project-featured {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 56px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .project-featured::after {
+            content: "FLAGSHIP";
+            position: absolute;
+            top: 24px;
+            right: -32px;
+            transform: rotate(45deg);
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 40px;
+            letter-spacing: 0.1em;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .badge-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+        }
+
+        .badge-highlight {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .project-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .project-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .feat-pill {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .feat-pill h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feat-pill p {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        /* 架构哲学四大支柱 */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 56px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 26px;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+        }
+
+        .pillar-num {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-violet);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .pillar-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .pillar-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 交互式终端 (Cyber Terminal) */
+        .terminal-container {
+            background: #090d16;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            margin-bottom: 56px;
+            font-family: var(--font-mono);
+        }
+
+        .terminal-topbar {
+            background: #0d1525;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .t-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+        .t-red { background: #ef4444; }
+        .t-yellow { background: #f59e0b; }
+        .t-green { background: #10b981; }
+
+        .terminal-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+        }
+
+        .terminal-body {
+            padding: 24px;
+            min-height: 240px;
+            max-height: 380px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .terminal-output {
+            margin-bottom: 16px;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+        }
+
+        .terminal-prompt-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .t-prompt {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            flex-grow: 1;
+        }
+
+        .terminal-quick-pills {
+            padding: 12px 24px;
+            background: #0b111e;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .t-pill-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .t-btn-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .t-btn-pill:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent-cyan);
+        }
+
+        /* 技能矩阵与能力拓扑 */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 56px;
+        }
+
+        .skill-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-group h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        /* 页脚 */
+        footer.page-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-dim);
+            font-size: 13px;
+            font-family: var(--font-mono);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 0 16px 60px;
+            }
+            .project-featured {
+                padding: 24px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-primary, .btn-secondary {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cyber-canvas"></canvas>
+
+    <div class="page-wrapper">
+        <!-- 导航系统条 -->
+        <header class="nav-header">
+            <a href="/" class="sys-identity">
+                <span class="sys-badge">KM-SYS</span>
+                <span class="sys-title">KinMan // 谨漫</span>
+            </a>
+            <div class="sys-status">
+                <span class="pulse-dot"></span>
+                <span>SYSTEM: ONLINE // INTJ-A</span>
             </div>
-            <div class="col-md-8" style="padding: 10px">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th colspan="3"><h4><i class="fa fa-address-card" aria-hidden="true"></i> profile</h4></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td scope="row"><i class="fa fa-user" aria-hidden="true"></i> Nickname： KinMan</td>
-                        <td><i class="fa fa-user-secret" aria-hidden="true"></i> 昵称：谨漫</td>
-                    </tr>
-                    <tr>
-                        <td scope="row"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Birthday：2003.3.XX</td>
-                        <td><i class="fa fa-map-marker" aria-hidden="true"></i> hometown：China | Sichuan | Chengdu</td>
-                    </tr>
-                    <tr>
-                        <td scope="row"><i class="fa fa-bicycle" aria-hidden="true"></i> Hobby：music | badminton |game
-                        </td>
-                        <td><i class="fa fa-angellist" aria-hidden="true"></i> feature：nature aptitude for math | soft |
-                            Sincere
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        </header>
+
+        <!-- 英雄区 -->
+        <section class="hero-section">
+            <div class="hero-tagline">
+                <span>⚡</span>
+                <span>SYSTEM ARCHITECT & GAME THEORIST</span>
+            </div>
+            <h1 class="hero-title">
+                以严谨筑系统，<br>
+                以拓扑驭博弈。
+            </h1>
+            <p class="hero-desc">
+                我是 <strong>KinMan（谨漫）</strong>，四川大学 (SCU) 软件工程背景。专注于 <strong>高性能后端与分布式架构设计</strong>、<strong>图论与启发式博弈决策算法</strong>。追求极简而强健的代码契约、确定性的并发仲裁与极致工程效能。
+            </p>
+            <div class="hero-actions">
+                <a href="/cogame/" class="btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    体验旗舰项目 · COGame 隔断博弈
+                </a>
+                <a href="https://github.com/KinMan-ZHR" target="_blank" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub 主页 (@KinMan-ZHR)
+                </a>
+                <a href="#terminal-section" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                    唤起系统控制台
+                </a>
+            </div>
+        </section>
+
+        <!-- 核心系统遥测 (Telemetry Grid) -->
+        <div class="telemetry-grid">
+            <div class="telemetry-card" style="--card-accent: var(--accent-cyan);">
+                <div class="telemetry-label">Architectural Archetype</div>
+                <div class="telemetry-value">INTJ-A</div>
+                <div class="telemetry-desc">全局战略推演 · 强逻辑驱动 · 追求严密架构与零冗余工程</div>
+            </div>
+            <div class="telemetry-card" style="--card-accent: var(--accent-emerald);">
+                <div class="telemetry-label">Primary Stack</div>
+                <div class="telemetry-value">Java 17/21</div>
+                <div class="telemetry-desc">Spring Cloud · JVM 底层调优 · 高并发无锁数据流 · WebSocket</div>
+            </div>
+            <div class="telemetry-card" style="--card-accent: var(--accent-violet);">
+                <div class="telemetry-label">Algorithmic Core</div>
+                <div class="telemetry-value">Graph & Game</div>
+                <div class="telemetry-desc">割点/割边分析 · Voronoi 空间分割 · 多步 Minimax 前瞻深算</div>
+            </div>
+            <div class="telemetry-card" style="--card-accent: var(--accent-amber);">
+                <div class="telemetry-label">Engineering Discipline</div>
+                <div class="telemetry-value">100% CI/CD</div>
+                <div class="telemetry-desc">GitHub Actions 自动化编译构建 · 跨平台原生打包 · 权威裁决</div>
             </div>
         </div>
-        <div class="row about-me">
-            <div class="col-md-6" style="padding: 5px 0">
-                <center><h5>关于我 | About Me</h5></center>
-                <ul class="list-group list">
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> edu： Software
-                        Engineering in SCU
-                    </li>
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> present： algorithm and
-                        AOP
-                    </li>
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> aim： excellent software
-                        architect
-                    </li>
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> CSDN-blog： study notes
-                    </li>
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> interest： write markdown
-                        file and release video
-                    </li>
-                    <li class="list-group-item"><i class="fa fa-circle" aria-hidden="true"></i> others： undecided</li>
-                </ul>
-            </div>
-            <div class="col-md-6 skills" style="padding: 5px 20px;">
-                <center><h5>我的技能 | My Skills</h5></center>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 65%;"
-                         aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">JAVA &emsp; 80%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%;"
-                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Mybatis &emsp; 90%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%;"
-                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">SpringBoot &emsp; 50%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-dark" role="progressbar" style="width: 25%;"
-                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">C/C++ 25%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                         aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">Git &emsp; 30%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 10%;"
-                         aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Python &nbsp;10%
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 5%;"
-                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Android &emsp; 5%
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class=" row contact-title" style="margin-top: 2px">
-            <div class="col-md-12" style="padding: 10px 0;">
-                <h4>联系我 | Contact Me</h4>
-            </div>
-        </div>
-        <div class="row contact" style="padding: 5px 0; text-align: center;">
 
-            <div class="col-md-2 col-4"><a href="https://github.com/KinMan-ZHR" title="Github"><img
-                    src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/github.jpg" alt="" srcset=""></a>
+        <!-- 旗舰项目特写 (COGame) -->
+        <section class="project-featured" id="featured-cogame">
+            <div class="project-meta">
+                <span class="badge-tag badge-highlight">FEATURED PROJECT</span>
+                <span class="badge-tag">Java 17</span>
+                <span class="badge-tag">WebSocket C/S</span>
+                <span class="badge-tag">Voronoi AI</span>
+                <span class="badge-tag">GitHub Actions CI/CD</span>
+                <span class="badge-tag">v2.6.0 正式版</span>
             </div>
-            <!--             <div class="col-md-2 col-4"><a href="https://www.zhihu.com/people/xuan-tian-40-64/activities" title="知乎"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/zhihu.jpg" alt="" srcset=""></a></div> -->
-            <div class="col-md-2 col-4"><a href="https://blog.csdn.net/zhr2376494700" title="CSDN"><img
-                    src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/csdn.png" alt="" srcset=""></a></div>
-            <!-- <div class="col-md-1"><a href="https://my.oschina.net/u/3957755" title="开源中国"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/oschina.png" alt="" srcset=""></a></div> -->
-            <!-- <div class="col-md-1"><a href="https://www.jianshu.com/u/3b3856869772" title="简书"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/jianshu.png" alt="" srcset=""></a></div> -->
-            <!-- <div class="col-md-1"><a href="https://juejin.im/user/5a902053f265da4e7527ae71" title="掘金"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/juejin.png" alt="" srcset=""></a></div> -->
-            <!-- <div class="col-md-1"><a href="https://segmentfault.com/u/baixiaobai_5b6a4161d6643/articles" title="Sgementfault"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/Sgementfault.png" alt="" srcset=""></a></div> -->
-            <!--            <div class="col-md-2 col-4"><a href="http://wpa.qq.com/msgrd?v=3&uin=2515361695&site=qq&menu=yes" title="QQ"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/qq.png" alt="" srcset=""></a></div>-->
-            <div class="col-md-2 col-4"><a href="2376494700@qq.com" title="邮件"><img
-                    src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/mail.png" alt="" srcset=""></a></div>
-            <!--            <div class="col-md-2 col-4"><a href="https://music.163.com/#/user/home?id=2135202072" title="QQ音乐"><img src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/images/social/tencent.png" alt="" srcset=""></a></div>-->
+            <h2 class="project-title">COGame - 《端脑》隔断棋盘博弈 (C/S 联机 & 智械国手重构版)</h2>
+            <p class="project-desc">
+                高度还原经典国漫《端脑》中 6×6 双方互相封锁边、以连通性中断决出胜负的终极脑力对战棋盘。项目历经 6 次大型架构重构，演化为包含 <strong>领域规则核心 (core)</strong>、<strong>智械双国手启发式推演 (ai)</strong>、<strong>WebSocket 权威裁判 (server)</strong> 与 <strong>跨平台桌面客户端 (client)</strong> 的全栈多模块工程。
+            </p>
+            <div class="project-features-grid">
+                <div class="feat-pill">
+                    <h4><span>🧠</span> 策天 · 盘枢国手 (Voronoi 领地切割)</h4>
+                    <p>全局势能分析与连通分量主动撕裂，结合战术蓄能与防反杀剪枝，掌控宏观胜势。</p>
+                </div>
+                <div class="feat-pill">
+                    <h4><span>⚔️</span> 绝影 · 贴身猎手 (极限近身卡位)</h4>
+                    <p>曼哈顿最短路径极限压迫与出度贴身封杀，短兵相接刀刀见血，刺客型终局斩算法。</p>
+                </div>
+                <div class="feat-pill">
+                    <h4><span>🖱️</span> 键鼠双模直觉操控</h4>
+                    <p>左键点击自动避障寻路步进走子，右键依据象限定向锁边交权，辅以拟锁边微光指示。</p>
+                </div>
+                <div class="feat-pill">
+                    <h4><span>📦</span> 全平台原生独立安装包</h4>
+                    <p>Windows .exe 免安装启动、macOS 原生 .app 束及通用 Jar，通过 GitHub Actions 全自动打包发布。</p>
+                </div>
+            </div>
+            <div class="project-actions">
+                <a href="/cogame/" class="btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    进入 COGame 专属发布站下载
+                </a>
+                <a href="https://github.com/KinMan-ZHR/COGame" target="_blank" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    检视源码仓库
+                </a>
+            </div>
+        </section>
+
+        <!-- 架构哲学 / INTJ 四大支柱 -->
+        <div class="section-header">
+            <div class="section-title-wrap">
+                <span class="section-code">PILLARS</span>
+                <h2 class="section-title">架构设计哲学 (Architectural Mindset)</h2>
+            </div>
         </div>
-        <!--        <div class="row copy" style="text-align: center;margin-top: 5px;">-->
-        <!--            <div class="col-md-12">-->
-        <!--                <h5 style="color: aquamarine">Copyright <i class="fa fa-copyright"></i> 20121 <a href="https://www.liuyao-blog.cn" style="text-decoration-color: -moz-default-color;color: #fff;">果果小师弟のBlog</a>. All Rights Reserved</h5>-->
-        <!--            </div>-->
-        <!--        </div>-->
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-num">01 / ABSTRACTION</div>
+                <h3 class="pillar-title">极致抽象与高内聚</h3>
+                <p class="pillar-desc">抵制浮躁的胶水代码与过度设计，通过清晰的领域模型与严格的状态机契约驾驭复杂业务系统。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-num">02 / DETERMINISM</div>
+                <h3 class="pillar-title">确定性与权威仲裁</h3>
+                <p class="pillar-desc">客户端仅作为渲染投影，服务端执行权威状态仲裁与防御；消除竞态冲突，追求数学确定性。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-num">03 / LOOKAHEAD</div>
+                <h3 class="pillar-title">深度前瞻与防反杀</h3>
+                <p class="pillar-desc">拒绝浅显的贪心走步；结合博弈树 Minimax、连通图割点分析与多步推演，于纷繁中直击致胜解。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-num">04 / AUTOMATION</div>
+                <h3 class="pillar-title">自主工程与自动化</h3>
+                <p class="pillar-desc">机器能够代劳的事情坚决不手动执行。从语义化 Tag 触发到云端全平台编译发布，实现全流水线自闭环。</p>
+            </div>
+        </div>
+
+        <!-- 交互式系统终端 -->
+        <div class="section-header" id="terminal-section">
+            <div class="section-title-wrap">
+                <span class="section-code">CLI</span>
+                <h2 class="section-title">交互式系统控制台 (Interactive Console)</h2>
+            </div>
+        </div>
+        <div class="terminal-container">
+            <div class="terminal-topbar">
+                <div class="terminal-dots">
+                    <span class="t-dot t-red"></span>
+                    <span class="t-dot t-yellow"></span>
+                    <span class="t-dot t-green"></span>
+                </div>
+                <span class="terminal-label">kinman@haoranserver: ~/profile.sh</span>
+                <span style="font-size: 11px; color: var(--accent-emerald);">SECURE_SHELL</span>
+            </div>
+            <div class="terminal-body" id="term-body">
+                <div class="terminal-output" id="term-output">KinMan System Kernel v2.6.0 (x86_64-linux-gnu)
+Type 'help' to inspect available system commands, or click the quick command pills below.
+--------------------------------------------------------------------------------</div>
+                <div class="terminal-prompt-line">
+                    <span class="t-prompt">kinman@arch:~$</span>
+                    <input type="text" class="terminal-input" id="term-input" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. 'help', 'whoami', 'cogame')...">
+                </div>
+            </div>
+            <div class="terminal-quick-pills">
+                <span class="t-pill-label">Quick Actions:</span>
+                <button class="t-btn-pill" onclick="runCommand('whoami')">whoami</button>
+                <button class="t-btn-pill" onclick="runCommand('skills')">skills</button>
+                <button class="t-btn-pill" onclick="runCommand('cogame')">cogame</button>
+                <button class="t-btn-pill" onclick="runCommand('motto')">motto</button>
+                <button class="t-btn-pill" onclick="runCommand('contact')">contact</button>
+                <button class="t-btn-pill" onclick="runCommand('clear')">clear</button>
+            </div>
+        </div>
+
+        <!-- 专业技术拓扑 (Skill Matrix) -->
+        <div class="section-header">
+            <div class="section-title-wrap">
+                <span class="section-code">STACK</span>
+                <h2 class="section-title">专业能力与技术拓扑 (Capability Matrix)</h2>
+            </div>
+        </div>
+        <div class="skills-matrix">
+            <div class="skill-group">
+                <h3><span style="color: var(--accent-cyan);">⚡</span> 核心后端与架构</h3>
+                <div class="skill-tags">
+                    <span class="skill-item">Java 17 / 21</span>
+                    <span class="skill-item">Spring Boot / Cloud</span>
+                    <span class="skill-item">MyBatis / JPA</span>
+                    <span class="skill-item">JVM 调优与内存分析</span>
+                    <span class="skill-item">高并发并发包 (JUC)</span>
+                    <span class="skill-item">Netty & WebSocket</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3><span style="color: var(--accent-emerald);">🗄️</span> 存储与分布式中间件</h3>
+                <div class="skill-tags">
+                    <span class="skill-item">MySQL (索引优化/分库分表)</span>
+                    <span class="skill-item">Redis (缓存设计/分布式锁)</span>
+                    <span class="skill-item">RabbitMQ (可靠消息投递)</span>
+                    <span class="skill-item">RESTful & RPC 架构</span>
+                    <span class="skill-item">数据一致性与幂等保障</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3><span style="color: var(--accent-violet);">🧩</span> 算法与智能决策</h3>
+                <div class="skill-tags">
+                    <span class="skill-item">图论连通性 (BFS / DFS)</span>
+                    <span class="skill-item">割点 & 割边拓扑分析</span>
+                    <span class="skill-item">Voronoi 领地空间分割</span>
+                    <span class="skill-item">Minimax / Alpha-Beta 前瞻</span>
+                    <span class="skill-item">LLM Agent 编排 & MCP 协议</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3><span style="color: var(--accent-amber);">🛠️</span> 极客工程与自动化</h3>
+                <div class="skill-tags">
+                    <span class="skill-item">Linux / Bash Scripting</span>
+                    <span class="skill-item">Git Flow & Semantic Tags</span>
+                    <span class="skill-item">GitHub Actions CI/CD</span>
+                    <span class="skill-item">Docker 容器编排</span>
+                    <span class="skill-item">Launch4j 跨平台分发</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面页脚 -->
+        <footer class="page-footer">
+            <div>
+                © 2026 KinMan (谨漫) · Engineered with INTJ Precision. All systems operational.
+            </div>
+            <div class="footer-links">
+                <a href="/cogame/">COGame 专属站</a>
+                <a href="https://github.com/KinMan-ZHR" target="_blank">GitHub</a>
+                <a href="https://blog.csdn.net/zhr2376494700" target="_blank">CSDN 博客</a>
+                <a href="mailto:2376494700@qq.com">联系邮箱</a>
+            </div>
+        </footer>
     </div>
-</div>
 
-<!--樱花特效-->
-<script src="https://cdn.jsdelivr.net/gh/Yafine/cdn@1.7/js/yinghua.js"></script>
+    <!-- 交互终端与粒子背景脚本 -->
+    <script>
+        // 1. 动态拓扑网状背景绘制 (Cyber Canvas)
+        const canvas = document.getElementById('cyber-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
+        const particles = [];
+        const particleCount = Math.min(Math.floor(width * 0.04), 65);
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                radius: Math.random() * 1.5 + 1
+            });
+        }
+
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 绘制网格线与微弱粒子
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 140)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+
+                if (mouse.x !== null) {
+                    const mDist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                    if (mDist < 160) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 * (1 - mDist / 160)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // 2. 交互式系统终端逻辑 (Cyber Terminal)
+        const termInput = document.getElementById('term-input');
+        const termOutput = document.getElementById('term-output');
+        const termBody = document.getElementById('term-body');
+
+        const COMMANDS = {
+            help: `Available commands:
+  whoami    - Display architect persona & system profile
+  skills    - Print current core technology matrix
+  cogame    - Direct jump to COGame portal & gameplay overview
+  motto     - Print INTJ engineering philosophy
+  contact   - Display communication channels & coordinates
+  clear     - Wipe current console buffer`,
+            whoami: `[IDENTITY]: KinMan (谨漫)
+[ROLE]: Software Architect & Systems Thinker
+[EDUCATION]: Software Engineering, Sichuan University (SCU)
+[PERSONALITY]: INTJ-A (The Architect)
+[TRAITS]: High analytical rigor, deep focus, strategic long-range planning, allergic to technical debt.`,
+            skills: `[STACK OVERVIEW]:
+  - Backend: Java 17/21, Spring Boot / Cloud, Netty, WebSocket, MyBatis
+  - Infra: Redis, RabbitMQ, MySQL (Tuning), Docker, Linux, Git Flow
+  - Algorithms: Graph Theory (BFS/DFS, Bridges/Cut-vertices), Voronoi Tessellation, Minimax Lookahead`,
+            cogame: `[COGame v2.6.0]:
+Flagship mental game based on comic "Die Now" (端脑).
+Featuring dual AI grandmasters (CeTian & JueYing), intuitive mouse navigation, and authoritative WebSocket arbitrator.
+Redirecting in 2 seconds... (or visit: /cogame/)`,
+            motto: `"Order from chaos. Precision through abstraction. Engineering the invisible infrastructure."
+（以严谨筑系统，以秩序驭混沌，在无声处构建宏伟基石。）`,
+            contact: `[CHANNELS]:
+  - GitHub: https://github.com/KinMan-ZHR
+  - CSDN:   https://blog.csdn.net/zhr2376494700
+  - Email:  2376494700@qq.com`
+        };
+
+        function executeCommand(cmd) {
+            const trimmed = cmd.trim().toLowerCase();
+            termOutput.textContent += `\nkinman@arch:~$ ${cmd}\n`;
+
+            if (trimmed === 'clear') {
+                termOutput.textContent = '';
+            } else if (trimmed === 'cogame') {
+                termOutput.textContent += COMMANDS.cogame + '\n';
+                setTimeout(() => {
+                    window.location.href = '/cogame/';
+                }, 1500);
+            } else if (COMMANDS[trimmed]) {
+                termOutput.textContent += COMMANDS[trimmed] + '\n';
+            } else if (trimmed === '') {
+                // do nothing
+            } else {
+                termOutput.textContent += `Command not recognized: '${trimmed}'. Type 'help' for available directives.\n`;
+            }
+            termBody.scrollTop = termBody.scrollHeight;
+        }
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                executeCommand(termInput.value);
+                termInput.value = '';
+            }
+        });
+
+        window.runCommand = function(cmd) {
+            executeCommand(cmd);
+        };
+    </script>
 </body>
-
 </html>

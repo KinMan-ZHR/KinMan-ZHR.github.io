@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COGame - 《端脑》隔断棋盘博弈客户端分发中心 (v2.6.0)</title>
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --card-bg: #151f32;
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --accent: #10b981;
+            --neon-blue: #38bdf8;
+            --purple: #7c3aed;
+            --amber: #f59e0b;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .badge-version {
+            display: inline-block;
+            background: linear-gradient(135deg, #0284c7, #7c3aed);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .download-box {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(2, 132, 199, 0.12) 0%, rgba(21, 31, 50, 0.8) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .download-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-download-win {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-download-win:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(2, 132, 199, 0.6);
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+        }
+
+        .btn-download-mac {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #334155, #0f172a);
+            border: 1px solid rgba(226, 232, 240, 0.25);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.5);
+        }
+
+        .btn-download-mac:hover {
+            transform: translateY(-2px);
+            border-color: rgba(248, 250, 252, 0.6);
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.7);
+            background: linear-gradient(135deg, #475569, #1e293b);
+        }
+
+        .btn-download-jar {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #e2e8f0;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-jar:hover {
+            background: rgba(51, 65, 85, 0.9);
+            color: #fff;
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .download-actions svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .file-info {
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .server-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .feature-item h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .changelog-item {
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 16px;
+            margin-bottom: 18px;
+        }
+
+        .changelog-item h3 {
+            font-size: 15px;
+            color: #f1f5f9;
+            margin-bottom: 6px;
+        }
+
+        .changelog-item ul {
+            padding-left: 18px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .changelog-item li {
+            margin-bottom: 4px;
+        }
+
+        pre {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13px;
+            color: #38bdf8;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge-version">🔥 最新发行版：v2.6.0 策天/绝影双国手深算与键鼠一体化竞技</span>
+            <h1>COGame - 《端脑》隔断棋盘博弈</h1>
+            <p class="subtitle">原汁原味还原《端脑》终极心理与空间拓扑战！现已全面实装<strong>双国手深算AI(策天·盘枢国手 / 绝影·贴身猎手)</strong>、<strong>3~10层思考深度前瞻推演</strong>、<strong>鼠标点击寻路走子与象限定向锁边</strong>与<strong>局内分先验证</strong>！</p>
+        </header>
+
+        <!-- 下载卡片 -->
+        <div class="card download-box">
+            <div class="download-actions">
+                <a href="COGame-Client.exe" class="btn-download-win" download>
+                    <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+                    Windows 专属版 (.exe)
+                </a>
+                <a href="COGame-macOS.zip" class="btn-download-mac" download>
+                    <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.47c.68-.82 1.13-1.96.99-3.11-1 .04-2.22.67-2.92 1.48-.62.72-1.16 1.88-1.02 3 .02 0 .04 0 .06 0 1.05 0 2.21-.57 2.89-1.37z"/></svg>
+                    macOS 专属版 (.zip)
+                </a>
+                <a href="COGame-Client.jar" class="btn-download-jar" download>
+                    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    跨平台通用包 (.jar)
+                </a>
+            </div>
+            <div class="file-info">
+                <strong>版本：v2.6.0 正式版</strong> | 🪟 Windows (双击 .exe) | 🍎 macOS (解压后双击 COGame.app) | 🐧 Linux / 通用 (Java 17+)
+            </div>
+            <div class="server-status">
+                <span class="status-dot"></span>
+                <span>对战服务器运行中：<code>ws://&lt;当前服务器IP&gt;:8088</code> (端口已放行，安全防御网已启动)</span>
+            </div>
+        </div>
+
+        <!-- v2.6.0 重磅升级 -->
+        <div class="card" style="border: 1px solid rgba(56, 189, 248, 0.4); background: linear-gradient(180deg, rgba(2, 132, 199, 0.08) 0%, rgba(21, 31, 50, 0.8) 100%);">
+            <h2 style="color: #38bdf8;">🤖 v2.6.0 策天/绝影双国手深算、深度滑动条与键鼠直觉交互 (最新)</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>♟️ 智械双国手策略棋手</h3>
+                    <p>精简重铸为<strong>策天 · 盘枢国手</strong>（全局 Voronoi 领地切割、空间拉伸与战术蓄能）与<strong>绝影 · 贴身猎手</strong>（曼哈顿贴身短兵相接、极限压迫出度封锁）两大风格鲜明的策略国手！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🎚️ 3~10 档思考深度滑动条</h3>
+                    <p>专属弹窗集成深色高对比 JSlider，支持 <strong>3 到 10 层前瞻推演深度</strong>（默认 5 档）。滑动即时呈现推演阶段评估，随需兼顾秒下棋与深度长算！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🛡️ 防反绝杀与一击必杀推演</h3>
+                    <p>引入 Beam Minimax 束搜索核心与 <strong>Anti-Blunder 防反杀机制</strong>，彻底杜绝单步露破绽；探查到一击必杀（Forced Cut）时立即锁定胜局！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🖱️ 鼠标左键点击走子寻路</h3>
+                    <p>点击棋盘上任意合法可达格，<strong>自动通过 BFS 避障寻路步进走子</strong>；点击自身格依象限直接调头，指哪打哪！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔒 鼠标右键象限定向锁边</h3>
+                    <p>右键点击格子，<strong>根据鼠标相对格心的上下左右象限立即精准封锁该边并交换行动权</strong>，毫秒级完成锁边交权！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✨ 悬停微光与锁边三角指引</h3>
+                    <p>鼠标悬停在合法格子即时呈现微光高亮；右键锁边前呈现拟锁边三角形方向实时指示，所见即所得！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- v2.4.0 核心机制 -->
+        <div class="card">
+            <h2>✨ v2.4.0 动态能量池与三大黄金阶梯</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>⚡ 动态能量池 (Energy Pool)</h3>
+                    <p>能量上限 = 边长-1，每回合恢复 ⌊边长/2⌋！微调/原地锁边可存蓄能量，满能量时可实现高达 5~11 步的<strong>超长距离奔袭绝杀</strong>！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📐 三大黄金阶梯规格</h3>
+                    <p><strong>小盘 6×6</strong> (回3/蓄5·纯净)、<strong>中盘 9×9</strong> (回4/蓄8·要塞)、<strong>大盘 12×12</strong> (回6/蓄11·迷宫)，等差进阶，节奏紧凑绝不冗长！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🏰 中大盘预置中立迷宫墙</h3>
+                    <p>9×9 与 12×12 开局自动生成 12%~16% 的中立钛灰阻隔墙，天然压缩出 1~2 格宽度的战略峡谷，<strong>一次锁边即可封死咽喉要道</strong>！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>♟️ 实体卡位与身位阻挡</h3>
+                    <p>彻底杜绝同格幽灵重叠！双方角色拥有刚性碰撞体积，不能踩入对手所在格。狭窄走廊中可直接用肉身封死要道，逼迫对手绕行！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🚪 专属房间等待室</h3>
+                    <p>房主建房后自动开启等待室：提供<strong>大号房号、一键复制到剪贴板</strong>、双方席位卡片，对手加入后毫秒级自动过渡开战！</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🎨 DarkTheme 全自绘深色</h3>
+                    <p>全面重构深色自绘组件（DarkButton 与专属暗黑弹窗），彻底切断 Windows 原生 LookAndFeel 浅色反噬，告别白底亮片！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对战模式 -->
+        <div class="card">
+            <h2>🎮 三大完整游玩模式</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3 style="color: #10b981;">① 单机双人对战</h3>
+                    <p>本地同屏对抗，支持自定昵称与棋盘大小，支持鼠标点按与键盘双模操控，适合线下二人面对面切磋与战术演练。</p>
+                </div>
+                <div class="feature-item">
+                    <h3 style="color: #38bdf8;">② 智械双国手对决 (AI Playstyles)</h3>
+                    <p>精简重铸的两大风格鲜明策略国手：<strong>🧠 策天 (盘枢国手 · 全局Voronoi领地切割)</strong> 与 <strong>⚔️ 绝影 (贴身猎手 · 极限贴身刺刀战)</strong>！支持 <strong>3~10 档深度滑动条</strong>自由调节推演前瞻层数！</p>
+                </div>
+                <div class="feature-item">
+                    <h3 style="color: #a855f7;">③ 网络联机大厅 (C/S)</h3>
+                    <p>支持前置登录认证唯一昵称、大厅房间列表浏览、密码私密房、输入房号秒进、等待室与公平分先仲裁。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 运行与操作 -->
+        <div class="card">
+            <h2>🚀 各平台客户端运行与控制指南</h2>
+            <div style="font-size: 14px; line-height: 1.8; color: #cbd5e1; margin-bottom: 16px;">
+                <p><strong>🪟 Windows 玩家</strong>：下载 <code>COGame-Client.exe</code> 后直接双击即可秒开游戏，无需手动执行任何终端命令！</p>
+                <p><strong>🍎 macOS 玩家</strong>：下载 <code>COGame-macOS.zip</code> 解压后直接双击 <code>COGame.app</code>（若遇系统安全提示，请右键选择「打开」或直接双击 <code>Start-COGame.command</code> 启动）。</p>
+                <p><strong>🐧 Linux / 跨平台</strong>：下载 <code>COGame-Client.jar</code>，在终端执行：</p>
+            </div>
+            <pre>java -jar COGame-Client.jar</pre>
+            
+            <h3 style="font-size: 14px; margin: 14px 0 8px; color: #38bdf8;">🖱️ 鼠标直觉操作 (v2.6.0 推荐)：</h3>
+            <ul>
+                <li><strong>左键点击任意合法目标格</strong>：自动执行 <strong>BFS 最短避障寻路步进走子</strong>；若点击自身所在格，则根据点击象限改变角色朝向。</li>
+                <li><strong>右键点击格子</strong>：根据鼠标相对格心的上下左右象限，<strong>直接精准封锁该边并立即交换行动权</strong>！</li>
+                <li><strong>鼠标悬停</strong>：实时高亮可达目标格（淡金微光）并在当前格边缘呈现<strong>拟锁边方向三角形指示</strong>，所见即所得。</li>
+            </ul>
+
+            <h3 style="font-size: 14px; margin: 14px 0 8px; color: #fff;">⌨️ 经典键盘快捷键：</h3>
+            <ul>
+                <li><strong>WASD / 方向键</strong>：在步数限制范围内步进移动并转向（可反向退回）。</li>
+                <li><strong>空格键 (SPACE)</strong>：沿角色当前朝向前进一步。</li>
+                <li><strong>R 键</strong>：顺时针旋转 90 度。</li>
+                <li><strong>L 键</strong>：<strong>封锁当前朝向的边</strong>，封锁成功后<strong>立即将行动权交换给对手</strong>！</li>
+                <li><strong>P 键</strong>：显示/隐藏双方最短连通路径（高亮线）。</li>
+                <li><strong>F11 键</strong>：切换沉浸式全屏。</li>
+                <li><strong>+ 键 / = 键</strong>：重置棋局。</li>
+            </ul>
+        </div>
+
+        <!-- 版本演进史 -->
+        <div class="card">
+            <h2>📜 版本演进历史</h2>
+            <div class="changelog-item">
+                <h3 style="color: #38bdf8;">v2.6.0 (当前最新版)</h3>
+                <ul>
+                    <li><strong>双国手架构精简重铸</strong>：精简流派为「策天 · 盘枢国手」（Voronoi 领地切割、空间拉伸与战术蓄能）与「绝影 · 贴身猎手」（曼哈顿贴身卡位与极限出度封杀），剔除冗余流派；</li>
+                    <li><strong>3~10 档思考深度滑动条</strong>：人机对决弹窗新增深色科技风 JSlider（最低 3，默认 5，最高 10），动态反馈推演深度与策略风格，支持从超快棋到深度长算自由调节；</li>
+                    <li><strong>前瞻深算与防反杀 (Anti-Blunder) 机制</strong>：引入多步 Beam Minimax 前瞻推演、一击必杀（Forced Cut）终局斩识别与对手反杀走法强力剪枝，彻底告别后手易被破解问题；</li>
+                    <li><strong>键鼠一体化直觉交互</strong>：全面支持鼠标左键点击寻路走子/原地调头、鼠标右键象限定向锁边交权，辅以悬停微光与拟锁边三角形实时预览；</li>
+                    <li><strong>对局内分先验证与优化</strong>：局内无缝重置并支持分先重开，验证小盘先手必胜假说；</li>
+                    <li><strong>全平台原生安装包同步升级</strong>：Windows .exe、macOS .app 束 (zip)、Linux 通用 jar 全面升级至 2.6.0。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.5.0</h3>
+                <ul>
+                    <li><strong>全平台原生独立分发</strong>：新增 <code>COGame-Client.exe</code> (Windows) 与 <code>COGame-macOS.zip</code> (macOS 原生 <code>.app</code> 束 + Retina 高清图标)，双端皆支持开箱双击秒开；</li>
+                    <li><strong>终极统一 CLI 竞技场</strong>：新增 <code>./bin/cogame</code>，支持 <code>play</code>、<code>online</code>、<code>bench</code>，统一调度人与人、人与AI、AI与AI；</li>
+                    <li><strong>拟人化三大独立 AI 棋风</strong>：推出 莫衡 (控盘大师)、荆刺 (破局猎手)、玄岳 (铁壁守卫)，并支持全景双能量池；</li>
+                    <li><strong>优化侧边栏行动提示排版</strong>：去除冗余当前玩家前缀，确保各分辨率下信息完整居中，绝不溢出；</li>
+                    <li><strong>真实大模型连续会话记忆</strong>：局内全程使用单会话（<code>session id</code>）记忆推理，终局自动释放注销，新局独立开启全新对话；</li>
+                    <li><strong>开放式 Stdio JSON 协议</strong>：任何语言（Python/C++/Rust）编写的外部 Bot 均可 5 行接入打天梯；</li>
+                    <li><strong>全自动棋谱录像</strong>：支持 <code>--record replay.json</code> 导出每步毫秒时延、位移与胜负拓扑数据；</li>
+                    <li><strong>自由分先与公平先手仲裁机制</strong>：人机对战自由指定玩家执先 (P1) 或 AI 率先出招 (P2)，验证小盘先手必胜假说；联机大厅与建房支持设置分先意愿，<strong>若双方均选先手则由服务端 50/50 掷骰公平裁定</strong>。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.4.0</h3>
+                <ul>
+                    <li>实装动态能量池系统（能量上限 = 边长-1，每回合恢复 ⌊边长/2⌋）；</li>
+                    <li>棋盘规格收敛为三大黄金阶梯：小盘 6×6、中盘 9×9、大盘 12×12；</li>
+                    <li>中大盘进阶模式：开局生成连通性保证的中立钛灰迷宫墙（12%~16%），消除大盘空旷跑图；</li>
+                    <li>侧边栏能量池仪表盘全动态绘制，支持长途奔袭与原地蓄力；</li>
+                    <li>启发式 AI 与棋盘可达气泡完全适配动态能量。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.3.0</h3>
+                <ul>
+                    <li>实装格子实体卡位机制（禁止同格重叠，允许身位堵门）；</li>
+                    <li>实装每回合 3 步限距机制与棋盘 3 步可达气泡高亮，支持退回再试探；</li>
+                    <li>实装专属房间等待室（RoomWaitingDialog），支持大号房号、一键复制、对手加入自动开局；</li>
+                    <li>引入 DarkThemeHelper，全面自绘深色高对比按钮与弹窗，根除 Windows 白底亮片不可读问题；</li>
+                    <li>全面激活 8088 端口应用级安全防御网与动态黑名单。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.2.0</h3>
+                <ul>
+                    <li>实装玩家前置登录认证与全服唯一昵称机制；</li>
+                    <li>实装房间大厅列表浏览、密码房间保护与房号精确加入；</li>
+                    <li>本地持久化玩家配置（ProfileManager）。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.1.0</h3>
+                <ul>
+                    <li>重构现代化暗黑科技风高对比度界面；</li>
+                    <li>支持 6×6 至 13×13 自由棋盘规格选择与 F11 自由全屏。</li>
+                </ul>
+            </div>
+            <div class="changelog-item">
+                <h3>v2.0.0</h3>
+                <ul>
+                    <li>将原本单机游戏成功重构为现代化 C/S 客户端与服务端分离架构。</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Developed with ❤️ by KinMan | COGame v2.6.0 Architecture Reborn</p>
+        </footer>
+    </div>
+
+    <script>
+        // 智能适配：若运行在 GitHub Pages (github.io) 环境，自动将下载按钮重定向至 GitHub Releases 最新产物
+        if (window.location.hostname.endsWith('github.io')) {
+            const releaseBase = 'https://github.com/KinMan-ZHR/COGame/releases/latest/download/';
+            document.querySelectorAll('.download-actions a').forEach(a => {
+                const href = a.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                    a.href = releaseBase + href;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
